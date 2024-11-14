@@ -66,6 +66,7 @@ resource "azurerm_subnet" "subnet" {
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
 }
 
+
 // SQL Server and Database
 
 resource "azurerm_mssql_server" "sql" {
@@ -75,6 +76,12 @@ resource "azurerm_mssql_server" "sql" {
   version                      = "12.0"
   administrator_login          = "4dm1n157r470r"
   administrator_login_password = "4-v3ry-53cr37-p455w0rd"
+}
+
+resource "azurerm_mssql_virtual_network_rule" "vnetrule" {
+  name      = "sql-vnet-rule"
+  server_id = azurerm_mssql_server.sql.id
+  submet_id = azurerm_subnet.subnet.id
 }
 
 resource "azurerm_mssql_database" "db" {
