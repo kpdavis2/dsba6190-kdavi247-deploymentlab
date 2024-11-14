@@ -70,7 +70,7 @@ resource "azurerm_subnet" "subnet" {
 
 resource "azurerm_mssql_server" "sql" {
   name                         = "sql${var.class_name}${var.student_name}${var.environment}${random_integer.deployment_id_suffix.result}"
-  resource_group_name          = "azurerm_resource_group.rg.name"
+  resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
   administrator_login          = "4dm1n157r470r"
