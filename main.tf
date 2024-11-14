@@ -86,12 +86,6 @@ resource "azurerm_mssql_database" "db" {
   sku_name     = "S0"
   enclave_type = "VBS"
 
-  network_rules {
-    default_action             = "Deny"
-    ip_rules                   = ["100.0.0.1"]
-    virtual_network_subnet_ids = [azurerm_subnet.subnet.id]
-  }
-
   tags = {
     foo = "bar"
   }
